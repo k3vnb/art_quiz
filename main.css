@@ -42,6 +42,10 @@ main {
     border-bottom: 1px solid black;
 }
 
+.next-question {
+    display: none;
+}
+
 footer {
     position: fixed;
     bottom: 0;

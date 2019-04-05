@@ -59,7 +59,7 @@ function generateGameStats(gameStats){
     return `
         <div class="status">
             <div class="progress-counter">
-                Question ${gameStats.currentQuestion} of 5
+                Question ${gameStats.currentQuestion + 1} of 5
             </div>
             <div class="score-counter">
                 ${gameStats.correctCounter} Correct ${gameStats.incorrectCounter} Incorrect
@@ -68,16 +68,20 @@ function generateGameStats(gameStats){
     `
 }
 
-function handleQuestionSubmit(){
-    // check if answer is correct
-    // change answered to 'true' & change card view
-    // update correct counter
+function handleNextQuestion(){
+    $('.quiz-container').on('click', '.next-question', () => {
+        console.log('next question clicked');
+        STORE[1].currentQuestion++
+        $('.next-question').hide();
+        getStatus();
+        showQuestions();
+    })
 }
 
 function generateNewQuestion(question){
     return `
         <img src=${question.url} alt="famous painting" height="100">
-        <form>
+        <form id="question-form">
             <input type="radio" name="quiz-answer" id="${question.answers[0]}">
             <label for="${question.answers[0]}">${question.answers[0]}</label>
             <input type="radio" name="quiz-answer" id="${question.answers[1]}">
@@ -88,18 +92,41 @@ function generateNewQuestion(question){
             <label for="${question.answers[3]}">${question.answers[3]}</label>
             <button type="submit" id="submit-form">Submit</button>
         </form>
+        <div class="feedback-div">
+
+        </div>
+        <button class="next-question">Next Question</button>
     `
 }
 
 function handleSubmitAnswer(answer){
     console.log('answer being handled');
-    const correctAnswer = STORE[0][STORE[1].currentQuestion].artist;
+    const currentQuestion = STORE[0][STORE[1].currentQuestion];
+    const correctAnswer = currentQuestion.artist;
+    currentQuestion.answered = true;
+    $('.next-question').show();
+    // $('#question-form').hide()
     if (answer === correctAnswer) {
         console.log('correct answer')
+        STORE[1].correctCounter++
+        $('.feedback-div').html(
+            `
+                <h2>Correct</h2>
+                <p>${currentQuestion.feedbackStatement}</p>
+            `
+        )
     } else {
         console.log('incorrect answer')
+        STORE[1].incorrectCounter++
+        $('.feedback-div').html(
+            `
+                <h2>Incorrect</h2>
+                <p>${currentQuestion.feedbackStatement}</p>
+            `
+        )
     }
-        
+    getStatus();
+    handleNextQuestion();
 }
 
 function showQuestions(){
