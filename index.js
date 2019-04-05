@@ -68,32 +68,54 @@ function generateGameStats(gameStats){
     `
 }
 
+function handleQuestionSubmit(){
+    // check if answer is correct
+    // change answered to 'true' & change card view
+    // update correct counter
+}
+
 function generateNewQuestion(question){
     return `
         <img src=${question.url} alt="famous painting" height="100">
         <form>
-            <input type="radio" id="question1">
-            <label for="question1">${question.answers[0]}</label>
-            <input type="radio" id="question2">
-            <label for="question2">${question.answers[1]}</label>
-            <input type="radio" id="question3">
-            <label for="question3">${question.answers[2]}</label>
-            <input type="radio" id="question4">
-            <label for="question4">${question.answers[3]}</label>
-            <button type="submit">Submit</button>
+            <input type="radio" name="quiz-answer" id="${question.answers[0]}">
+            <label for="${question.answers[0]}">${question.answers[0]}</label>
+            <input type="radio" name="quiz-answer" id="${question.answers[1]}">
+            <label for="${question.answers[1]}">${question.answers[1]}</label>
+            <input type="radio" name="quiz-answer" id="${question.answers[2]}">
+            <label for="${question.answers[2]}">${question.answers[2]}</label>
+            <input type="radio" name="quiz-answer" id="${question.answers[3]}">
+            <label for="${question.answers[3]}">${question.answers[3]}</label>
+            <button type="submit" id="submit-form">Submit</button>
         </form>
     `
 }
 
-function loopThruQuestions(){
+function handleSubmitAnswer(answer){
+    console.log('answer being handled');
+    const correctAnswer = STORE[0][STORE[1].currentQuestion].artist;
+    if (answer === correctAnswer) {
+        console.log('correct answer')
+    } else {
+        console.log('incorrect answer')
+    }
+        
+}
+
+function showQuestions(){
 
     $('.quiz-question').html(generateNewQuestion(STORE[0][STORE[1].currentQuestion]))
     $('.question-page').show();
 
-
+    $('.quiz-container').on('click', '#submit-form', () => {
+        event.preventDefault();
+        const answer = $('input[name="quiz-answer"]:checked').val('')[0].id;
+        handleSubmitAnswer(answer);
+    });
 
 }
 
+//getStatus keeps track of current question and score
 function getStatus(){
     $('.status').html(generateGameStats(STORE[1]));
 }
@@ -104,7 +126,7 @@ function startQuiz(){
         console.log('quiz started');
         $('.start-page').hide();
         getStatus();
-        loopThruQuestions();
+        showQuestions();
     })
 }
 
