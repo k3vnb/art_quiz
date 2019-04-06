@@ -42,7 +42,7 @@ main {
     border-bottom: 1px solid black;
 }
 
-.next-question {
+.next-question, .get-results {
     display: none;
 }
 

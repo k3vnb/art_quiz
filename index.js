@@ -59,7 +59,7 @@ function generateGameStats(gameStats){
     return `
         <div class="status">
             <div class="progress-counter">
-                Question ${gameStats.currentQuestion + 1} of 5
+                Question ${gameStats.currentQuestion + 1 < 6 ? gameStats.currentQuestion + 1 : 5} of 5
             </div>
             <div class="score-counter">
                 ${gameStats.correctCounter} Correct ${gameStats.incorrectCounter} Incorrect
@@ -77,6 +77,12 @@ function handleNextQuestion(){
         $('.next-question').hide();
         getStatus();
         showQuestions();
+    })
+}
+
+function handleGetResults(){
+    $('.get-results').click(() => {
+        console.log('get results clicked')       
     })
 }
 
@@ -98,6 +104,7 @@ function generateNewQuestion(question){
 
         </div>
         <button class="next-question">Next Question</button>
+        <button class="get-results">Get Results</button>
     `
 }
 
@@ -109,11 +116,23 @@ function handleSubmitAnswer(answer){
     const correctAnswer = currentQuestion.artist;
     currentQuestion.answered = true;
     $('form').hide();
-    $('.next-question').show();
+
+
+
+
+    if ([STORE[1].currentQuestion] < 4){
+        $('.next-question').show();
+    } else {
+        $('.get-results').show();
+    }
+
+
+
+
     // $('#question-form').hide()
     if (answer === correctAnswer) {
         console.log('correct answer')
-        STORE[1].correctCounter+= 1
+        STORE[1].correctCounter++
         console.log('correctCounter: ' + STORE[1].correctCounter)
         $('.feedback-div').html(
             `
@@ -123,7 +142,7 @@ function handleSubmitAnswer(answer){
         )
     } else {
         console.log('incorrect answer')
-        STORE[1].incorrectCounter+= 1
+        STORE[1].incorrectCounter++
         $('.feedback-div').html(
             `
                 <h2>Incorrect</h2>
@@ -133,6 +152,7 @@ function handleSubmitAnswer(answer){
     }
     getStatus();
     handleNextQuestion();
+    handleGetResults();
 }
 
 function showQuestions(){
