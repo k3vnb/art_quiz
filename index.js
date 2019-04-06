@@ -71,7 +71,7 @@ function generateGameStats(gameStats){
 function handleNextQuestion(){
     $('.quiz-container').on('click', '.next-question', (event) => {
         event.preventDefault();
-        event.stopPropagation();
+        event.stopImmediatePropagation();
         console.log('next question clicked');
         STORE[1].currentQuestion++
         $('.next-question').hide();
@@ -103,21 +103,22 @@ function generateNewQuestion(question){
 
 function handleSubmitAnswer(answer){
     event.preventDefault();
+    event.stopPropagation();
     console.log('answer being handled');
-    const currentQuestn = STORE[0][STORE[1].currentQuestion];
-    const correctAnswer = currentQuestn.artist;
-    currentQuestn.answered = true;
+    const currentQuestion = STORE[0][STORE[1].currentQuestion];
+    const correctAnswer = currentQuestion.artist;
+    currentQuestion.answered = true;
     $('form').hide();
     $('.next-question').show();
     // $('#question-form').hide()
     if (answer === correctAnswer) {
         console.log('correct answer')
-        STORE[1].correctCounter++
+        STORE[1].correctCounter+= 1
         console.log('correctCounter: ' + STORE[1].correctCounter)
         $('.feedback-div').html(
             `
                 <h2>Correct</h2>
-                <p>${currentQuestn.feedbackStatement}</p>
+                <p>${currentQuestion.feedbackStatement}</p>
             `
         )
     } else {
@@ -126,7 +127,7 @@ function handleSubmitAnswer(answer){
         $('.feedback-div').html(
             `
                 <h2>Incorrect</h2>
-                <p>${currentQuestn.feedbackStatement}</p>
+                <p>${currentQuestion.feedbackStatement}</p>
             `
         )
     }
@@ -139,10 +140,10 @@ function showQuestions(){
     $('.quiz-question').html(generateNewQuestion(STORE[0][STORE[1].currentQuestion]))
     $('.question-page').show();
 
-    $('.quiz-container').on('click', `#submit-form-${STORE[0][STORE[1].currentQuestion].artist}`, (event) => {
+    $('.quiz-container').on('click', `#submit-form-${STORE[0][STORE[1].currentQuestion].artist}`, () => {
         event.preventDefault();
+        event.stopImmediatePropagation();
         console.log('form submitted');
-        event.stopPropagation();
         const answer = $('input[name="quiz-answer"]:checked').val('')[0].id;
         handleSubmitAnswer(answer);
     });
@@ -157,6 +158,8 @@ function getStatus(){
 function startQuiz(){
     // change view from beginning page to first question
     $('.start-quiz').on('click', () => {
+        event.preventDefault();
+        event.stopPropagation();
         console.log('quiz started');
         $('.start-page').hide();
         getStatus();
