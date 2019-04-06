@@ -69,7 +69,9 @@ function generateGameStats(gameStats){
 }
 
 function handleNextQuestion(){
-    $('.quiz-container').on('click', '.next-question', () => {
+    $('.quiz-container').on('click', '.next-question', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         console.log('next question clicked');
         STORE[1].currentQuestion++
         $('.next-question').hide();
@@ -90,7 +92,7 @@ function generateNewQuestion(question){
             <label for="${question.answers[2]}">${question.answers[2]}</label>
             <input type="radio" name="quiz-answer" id="${question.answers[3]}">
             <label for="${question.answers[3]}">${question.answers[3]}</label>
-            <button type="submit" id="submit-form">Submit</button>
+            <button type="submit" id="submit-form-${question.artist}">Submit</button>
         </form>
         <div class="feedback-div">
 
@@ -100,28 +102,31 @@ function generateNewQuestion(question){
 }
 
 function handleSubmitAnswer(answer){
+    event.preventDefault();
     console.log('answer being handled');
-    const currentQuestion = STORE[0][STORE[1].currentQuestion];
-    const correctAnswer = currentQuestion.artist;
-    currentQuestion.answered = true;
+    const currentQuestn = STORE[0][STORE[1].currentQuestion];
+    const correctAnswer = currentQuestn.artist;
+    currentQuestn.answered = true;
+    $('form').hide();
     $('.next-question').show();
     // $('#question-form').hide()
     if (answer === correctAnswer) {
         console.log('correct answer')
         STORE[1].correctCounter++
+        console.log('correctCounter: ' + STORE[1].correctCounter)
         $('.feedback-div').html(
             `
                 <h2>Correct</h2>
-                <p>${currentQuestion.feedbackStatement}</p>
+                <p>${currentQuestn.feedbackStatement}</p>
             `
         )
     } else {
         console.log('incorrect answer')
-        STORE[1].incorrectCounter++
+        STORE[1].incorrectCounter+= 1
         $('.feedback-div').html(
             `
                 <h2>Incorrect</h2>
-                <p>${currentQuestion.feedbackStatement}</p>
+                <p>${currentQuestn.feedbackStatement}</p>
             `
         )
     }
@@ -130,12 +135,14 @@ function handleSubmitAnswer(answer){
 }
 
 function showQuestions(){
-
+    console.log(STORE[1].currentQuestion);
     $('.quiz-question').html(generateNewQuestion(STORE[0][STORE[1].currentQuestion]))
     $('.question-page').show();
 
-    $('.quiz-container').on('click', '#submit-form', () => {
+    $('.quiz-container').on('click', `#submit-form-${STORE[0][STORE[1].currentQuestion].artist}`, (event) => {
         event.preventDefault();
+        console.log('form submitted');
+        event.stopPropagation();
         const answer = $('input[name="quiz-answer"]:checked').val('')[0].id;
         handleSubmitAnswer(answer);
     });
