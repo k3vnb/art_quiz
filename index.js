@@ -80,9 +80,33 @@ function handleNextQuestion(){
     })
 }
 
+function generateResultsFeedback(){
+    if (STORE[1].correctCounter === STORE[0].length){
+        return `
+            <h2>PERFECT SCORE</h2>
+            <p>You have a master's eye</p>
+            `
+    } else if (STORE[1].correctCounter > STORE[1].incorrectCounter){
+        return `
+            <h2>GREAT JOB</h2>
+            <p>You know art!</p>
+        `
+    } else {
+        return `
+            <h2>NICE TRY</h2>
+            <p>There's lots of great art out there, keep learning!</p>
+        `
+    }
+}
+
 function handleGetResults(){
     $('.get-results').click(() => {
-        console.log('get results clicked')       
+        console.log('get results clicked');
+        $('.quiz-card').html(`
+            <h2>Your Results:</h2>
+            ${STORE[1].correctCounter} Correct
+            ${STORE[1].incorrectCounter} Incorrect
+            ${generateResultsFeedback()}`)    
     })
 }
 
@@ -118,22 +142,15 @@ function handleSubmitAnswer(answer){
     $('form').hide();
 
 
-
-
-    if ([STORE[1].currentQuestion] < 4){
+    if ([STORE[1].currentQuestion] < STORE[0].length - 1){
         $('.next-question').show();
     } else {
         $('.get-results').show();
     }
 
-
-
-
     // $('#question-form').hide()
     if (answer === correctAnswer) {
-        console.log('correct answer')
         STORE[1].correctCounter++
-        console.log('correctCounter: ' + STORE[1].correctCounter)
         $('.feedback-div').html(
             `
                 <h2>Correct</h2>
@@ -156,11 +173,11 @@ function handleSubmitAnswer(answer){
 }
 
 function showQuestions(){
-    console.log(STORE[1].currentQuestion);
-    $('.quiz-question').html(generateNewQuestion(STORE[0][STORE[1].currentQuestion]))
+    const currentQuestion = STORE[0][STORE[1].currentQuestion];
+    $('.quiz-question').html(generateNewQuestion(currentQuestion))
     $('.question-page').show();
 
-    $('.quiz-container').on('click', `#submit-form-${STORE[0][STORE[1].currentQuestion].artist}`, () => {
+    $('.quiz-container').on('click', `#submit-form-${currentQuestion.artist}`, () => {
         event.preventDefault();
         event.stopImmediatePropagation();
         console.log('form submitted');
