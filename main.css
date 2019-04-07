@@ -9,7 +9,7 @@
       background-color: #eae2ea;
       background-image: url('https://art-educ4kids.weebly.com/uploads/8/9/6/9/8969100/6639945_orig.jpg');
       background-size: cover;
-      background-repeat: no-repeat;
+      background-repeat: repeat-y;
   }
 
 body > * {
