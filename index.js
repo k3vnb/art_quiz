@@ -49,7 +49,7 @@ const STORE = [
         }
     ],
     {
-        currentQuestion: 0,
+        currentQuestion: 4,
         correctCounter: 0,
         incorrectCounter: 0
     }
@@ -80,6 +80,52 @@ function handleNextQuestion(){
     })
 }
 
+function showQuestions(){
+    console.log('x')
+    const currentQuestion = STORE[0][STORE[1].currentQuestion];
+    $('.quiz-question').html(generateNewQuestion(currentQuestion))
+    $('.question-page').show();
+
+    $('.quiz-container').on('click', `#submit-form-${currentQuestion.artist}`, () => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        console.log('form submitted');
+        const answer = $('input[name="quiz-answer"]:checked').val('')[0].id;
+        handleSubmitAnswer(answer);
+    });
+
+}
+
+function handleRestartQuiz(){
+
+    $('.take-quiz-again').click(() => {
+        event.preventDefault();
+        event.stopPropagation();
+        console.log('take quiz again clicked');
+        STORE[1].currentQuestion = 0;
+        STORE[1].correctCounter = 0;
+        STORE[1].incorrectCounter = 0;
+
+        $('.quiz-container').html(`
+            <div class="start-page quiz-card">
+                <h2>Welcome to Quiz</h2>
+                <h4>Brief Description</h4>
+                <button class="start-quiz">Click to Start</button>
+            </div>
+            <div class="question-page question-page-one quiz-card">
+            <div class="status">
+            </div>
+            <h2>Name the Artist</h2>
+            <div class="quiz-question">
+
+            </div>
+        </div>
+        `)
+        startQuiz();
+        console.log(STORE[1])
+    })
+}
+
 function generateResultsFeedback(){
     if (STORE[1].correctCounter === STORE[0].length){
         return `
@@ -106,7 +152,10 @@ function handleGetResults(){
             <h2>Your Results:</h2>
             ${STORE[1].correctCounter} Correct
             ${STORE[1].incorrectCounter} Incorrect
-            ${generateResultsFeedback()}`)    
+            ${generateResultsFeedback()}
+            <button class="take-quiz-again">Take the Quiz Again!</button>
+            `)   
+            handleRestartQuiz();
     })
 }
 
@@ -172,20 +221,7 @@ function handleSubmitAnswer(answer){
     handleGetResults();
 }
 
-function showQuestions(){
-    const currentQuestion = STORE[0][STORE[1].currentQuestion];
-    $('.quiz-question').html(generateNewQuestion(currentQuestion))
-    $('.question-page').show();
 
-    $('.quiz-container').on('click', `#submit-form-${currentQuestion.artist}`, () => {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        console.log('form submitted');
-        const answer = $('input[name="quiz-answer"]:checked').val('')[0].id;
-        handleSubmitAnswer(answer);
-    });
-
-}
 
 //getStatus keeps track of current question and score
 function getStatus(){
@@ -193,8 +229,9 @@ function getStatus(){
 }
 
 function startQuiz(){
+    
     // change view from beginning page to first question
-    $('.start-quiz').on('click', () => {
+    $('.quiz-container').on('click', '.start-quiz', () => {
         event.preventDefault();
         event.stopPropagation();
         console.log('quiz started');
