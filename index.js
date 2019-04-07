@@ -49,7 +49,7 @@ const STORE = [
         }
     ],
     {
-        currentQuestion: 4,
+        currentQuestion: 0,
         correctCounter: 0,
         incorrectCounter: 0
     }
@@ -59,7 +59,7 @@ function generateGameStats(gameStats){
     return `
         <div class="status">
             <div class="progress-counter">
-                Question ${gameStats.currentQuestion + 1 < 6 ? gameStats.currentQuestion + 1 : 5} of 5
+                Question ${gameStats.currentQuestion + 1 < 6 ? gameStats.currentQuestion + 1 : 5} of ${STORE[0].length}
             </div>
             <div class="score-counter">
                 ${gameStats.correctCounter} Correct ${gameStats.incorrectCounter} Incorrect
@@ -109,7 +109,7 @@ function handleRestartQuiz(){
         $('.quiz-container').html(`
             <div class="start-page quiz-card">
                 <h2>Welcome to Quiz</h2>
-                <h4>Brief Description</h4>
+                <h4>Can you match the famous artwork with it's artist?</h4>
                 <button class="start-quiz">Click to Start</button>
             </div>
             <div class="question-page question-page-one quiz-card">
@@ -163,15 +163,25 @@ function generateNewQuestion(question){
     return `
         <img src=${question.url} alt="famous painting" height="100">
         <form id="question-form">
-            <input type="radio" name="quiz-answer" id="${question.answers[0]}">
-            <label for="${question.answers[0]}">${question.answers[0]}</label>
-            <input type="radio" name="quiz-answer" id="${question.answers[1]}">
-            <label for="${question.answers[1]}">${question.answers[1]}</label>
-            <input type="radio" name="quiz-answer" id="${question.answers[2]}">
-            <label for="${question.answers[2]}">${question.answers[2]}</label>
-            <input type="radio" name="quiz-answer" id="${question.answers[3]}">
-            <label for="${question.answers[3]}">${question.answers[3]}</label>
-            <button type="submit" id="submit-form-${question.artist}">Submit</button>
+            <div class="input-container">
+                <div>
+                    <input type="radio" name="quiz-answer" id="${question.answers[0]}">
+                    <label for="${question.answers[0]}">${question.answers[0]}</label>
+                </div>
+                <div>
+                    <input type="radio" name="quiz-answer" id="${question.answers[1]}">
+                    <label for="${question.answers[1]}">${question.answers[1]}</label>
+                </div>
+                <div>
+                    <input type="radio" name="quiz-answer" id="${question.answers[2]}">
+                    <label for="${question.answers[2]}">${question.answers[2]}</label>
+                </div>
+                <div>
+                    <input type="radio" name="quiz-answer" id="${question.answers[3]}">
+                    <label for="${question.answers[3]}">${question.answers[3]}</label>
+                </div>
+            </div>
+            <button type="submit" id="submit-form-${question.artist}" class="form-submit-btn">Submit</button>
         </form>
         <div class="feedback-div">
 
