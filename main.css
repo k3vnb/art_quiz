@@ -3,9 +3,13 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
   }
+
   body {
       margin: 0;
       background-color: #eae2ea;
+      background-image: url('https://art-educ4kids.weebly.com/uploads/8/9/6/9/8969100/6639945_orig.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
   }
 
 body > * {
@@ -18,6 +22,10 @@ header {
     color: white;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif!important;
+    background-image: url('https://i.pinimg.com/originals/dd/e4/9b/dde49b58dd2649b9a11e0a8cd8b35e8c.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 5%;
 }
 
 header h1 {
@@ -26,6 +34,7 @@ header h1 {
     letter-spacing: 5px;
     font-size: 4em;
     margin: .1%;
+    margin-top: -1%;
 }
 
 header h2 {
@@ -34,18 +43,57 @@ header h2 {
     color: #42b1f7;
 }
 
+.quiz-title {
+    margin: 1%;
+   text-align: right;
+}
+
+.start-page, .results-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.results-card-score-counter {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+}
+
+.title-img {
+    height: 250px;
+    width: auto;
+    border-radius: 50%;
+    border: 5px solid #c5b768;
+}
+.results-img {
+    width: 90%;
+    height: auto;
+    border-radius: 50%;
+    border: 5px solid #731c09;
+}
+
 main {
     position: relative;
     margin-bottom: 100px;
 }
+
 .status {
     text-align: right;
 }
+
 .progress-counter {
     font-size: 1.1em;
 }
+
 .score-counter {
     font-size: .8em;
+}
+
+#question-form h4 {
+    margin-top: 1%;
 }
 
 .question-page-one {
@@ -55,7 +103,9 @@ main {
 .quiz-container {
     border: 1px solid black;
     padding: 1%;
-    width: 65%;
+    width: 90%;
+    max-width: 600px;
+    min-height: 500px;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
@@ -83,26 +133,46 @@ form {
 .input-container div {
     width: 49%;
     padding: 1%;
-    border: 1px solid black;
+    border: .5px solid #c3c8d0;
     margin: .15%
+}
+.input-container div:hover {
+    border: .5px solid #42b942;
+}
+
+.form-submit-btn, .blue-btn {
+    margin-top: 5%;
+    color: white;
+    height: 50px;
+    font-size: 1.3em;
 }
 
 .form-submit-btn {
-    margin-top: 5%;
     background-color: #42b942;
-    color: white;
-    font-size: 1.3em;
-    height: 50px;
     width: 100%;
 }
 
-.form-submit-btn:hover {
+
+.blue-btn {
+    background-color: #3174ca;
+    width: 100%;
+}
+
+.form-submit-btn:hover, .blue-btn:hover {
     cursor: pointer;
     box-shadow: 1px 2px 3px #000000bd;
 }
 
 .next-question, .get-results {
     display: none;
+}
+
+.feedback-div p {
+    font-size: .88em;
+}
+
+.feedback-div h2 {
+    margin: .1%;
 }
 
 footer {
@@ -112,5 +182,6 @@ footer {
     width: 100%;
     background-color: #212129;
     color: white;
+    font-size: .7em;
 }
 

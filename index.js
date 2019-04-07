@@ -5,7 +5,7 @@ const STORE = [
         {
             url: 'https://target.scene7.com/is/image/Target/GUEST_e83abb04-f8d2-4b15-a09a-8c2c241b3d7b?wid=488&hei=488&fmt=webp',
             artist: 'Mondrian',
-            feedbackStatement: 'Piet Mondrian (1872 – 1944), was a Dutch painter and theoretician who is regarded as one of the greatest artists of the 20th century. He is known for being one of the pioneers of 20th century abstract art, as he changed his artistic direction from figurative painting to an increasingly abstract style, until he reached a point where his artistic vocabulary was reduced to simple geometric elements.',
+            feedbackStatement: '<strong>Piet Mondrian</strong> (1872 – 1944), was a Dutch painter and theoretician who is regarded as one of the greatest artists of the 20th century. He is known for being one of the pioneers of 20th century abstract art, as he changed his artistic direction from figurative painting to an increasingly abstract style, until he reached a point where his artistic vocabulary was reduced to simple geometric elements.',
             wikipediaURL: 'https://en.wikipedia.org/wiki/Piet_Mondrian',
             answers: ['Mondrian', 'Dali', 'Warhol', 'Kandinsky'],
             answered: false,
@@ -14,7 +14,7 @@ const STORE = [
         {
             url: 'https://www.schirn.de/fileadmin/SCHIRN/Ausstellungen/2017/Magritte/Schirn_Presse_Magritte_L_Heureux_donateur_1966.jpg',
             artist: 'Magritte',
-            feedbackStatement: "Renee Magritte (1898 – 1967) was a Belgian Surrealist artist. He became well known for creating a number of witty and thought-provoking images. Often depicting ordinary objects in an unusual context, his work is known for challenging observers' preconditioned perceptions of reality. His imagery has influenced Pop art, minimalist and conceptual art.",
+            feedbackStatement: "<strong>Renee Magritte</strong> (1898 – 1967) was a Belgian Surrealist artist. He became well known for creating a number of witty and thought-provoking images. Often depicting ordinary objects in an unusual context, his work is known for challenging observers' preconditioned perceptions of reality. His imagery has influenced Pop art, minimalist and conceptual art.",
             wikipediaURL: 'https://en.wikipedia.org/wiki/Ren%C3%A9_Magritte',
             answers: ['Dali', 'DuChamp', 'Magritte', 'Paul Klee'],
             answered: false,
@@ -23,7 +23,7 @@ const STORE = [
         {
             url: 'https://www.christies.com/img/LotImages/2018/NYR/2018_NYR_16718_0011_000(claude_monet_la_seine_a_lavacourt).jpg',
             artist: 'Monet',
-            feedbackStatement: "Oscar-Claude Monet (1840 – 1926) was a French painter, a founder of French Impressionist painting and the most consistent and prolific practitioner of the movement's philosophy of expressing one's perceptions before nature, especially as applied to plein air landscape painting.The term 'Impressionism is derived from the title of his painting Impression, soleil levant (Impression, Sunrise), which was exhibited in 1874 in the first of the independent exhibitions mounted by Monet and his associates as an alternative to the Salon de Paris.",
+            feedbackStatement: "<strong>Oscar-Claude Monet</strong> (1840 – 1926) was a French painter, a founder of French Impressionist painting & prolific practitioner of the movement's philosophy of expressing one's perceptions before nature, especially in landscape painting.The term 'Impressionism is derived from the title of his painting Impression, soleil levant (Impression, Sunrise), which was exhibited in 1874.",
             wikipediaURL: 'https://en.wikipedia.org/wiki/Claude_Monet',
             answers: ['VanGogh', 'Renoir', 'Rembrandt', 'Monet'],
             answered: false,
@@ -32,7 +32,7 @@ const STORE = [
         {
             url: 'https://imagenes.museothyssen.org/sites/default/files/imagen/obras/1977.77_tension-suave-no-85.jpg',
             artist: 'Kandinsky',
-            feedbackStatement: "Wassily Kandinsky (1866 – 1944) was a Russian painter and art theorist. Kandinsky is generally credited as the pioneer of abstract art.",
+            feedbackStatement: "<strong>Wassily Kandinsky</strong> (1866 – 1944) was a Russian painter and art theorist. Kandinsky is generally credited as the pioneer of abstract art.",
             wikipediaURL: 'https://en.wikipedia.org/wiki/Wassily_Kandinsky',
             answers: ['Picasso', 'Kandinsky', 'Jackson Pollack', 'Frida Kahlo'],
             answered: false,
@@ -41,7 +41,7 @@ const STORE = [
         {
             url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Rembrandt_-_Rembrandt_and_Saskia_in_the_Scene_of_the_Prodigal_Son_-_Google_Art_Project.jpg/220px-Rembrandt_-_Rembrandt_and_Saskia_in_the_Scene_of_the_Prodigal_Son_-_Google_Art_Project.jpg',
             artist: 'Rembrandt',
-            feedbackStatement: "Rembrandt Harmenszoon van Rijn (1606 – 1669) was a Dutch draughtsman, painter and printmaker. An innovative and prolific master, he is generally considered one of the greatest visual artists in the history of art and the most important in Dutch art history. Unlike most Dutch masters of the 17th century, Rembrandt's works depict a wide range of style and subject matter, from portraits and self-portraits to landscapes, genre scenes, allegorical and historical scenes, biblical and mythological themes as well as animal studies. His contributions to art came in a period of great wealth and cultural achievement that historians call the Dutch Golden Age",
+            feedbackStatement: "<strong>Rembrandt Harmenszoon van Rijn</strong> (1606 – 1669) was a Dutch draughtsman, painter and printmaker. An innovative and prolific master, he is generally considered one of the greatest visual artists in the history of art and the most important in Dutch art history. Unlike most Dutch masters of the 17th century, Rembrandt's works depict a wide range of style and subject matter, from portraits and self-portraits to landscapes, genre scenes, allegorical and historical scenes, biblical and mythological themes as well as animal studies. His contributions to art came in a period of great wealth and cultural achievement that historians call the Dutch Golden Age",
             wikipediaURL: 'https://en.wikipedia.org/wiki/Rembrandt',
             answers: ['Monet', 'Rembrandt', 'DaVinci', 'Banksy'],
             answered: false,
@@ -108,14 +108,15 @@ function handleRestartQuiz(){
 
         $('.quiz-container').html(`
             <div class="start-page quiz-card">
-                <h2>Welcome to Quiz</h2>
+                <h2>Welcome to Art Quiz</h2>
+                <img class="title-img" src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1c/Pablo_Picasso%2C_1910%2C_Girl_with_a_Mandolin_%28Fanny_Tellier%29%2C_oil_on_canvas%2C_100.3_x_73.6_cm%2C_Museum_of_Modern_Art_New_York..jpg/800px-Pablo_Picasso%2C_1910%2C_Girl_with_a_Mandolin_%28Fanny_Tellier%29%2C_oil_on_canvas%2C_100.3_x_73.6_cm%2C_Museum_of_Modern_Art_New_York..jpg" alt="Picasso's 'Girl with a Mandolin''" />
                 <h4>Can you match the famous artwork with it's artist?</h4>
-                <button class="start-quiz">Click to Start</button>
+                <button class="start-quiz blue-btn">Click to Start</button>
             </div>
             <div class="question-page question-page-one quiz-card">
             <div class="status">
             </div>
-            <h2>Name the Artist</h2>
+            <h2 class="quiz-title">Name the Artist</h2>
             <div class="quiz-question">
 
             </div>
@@ -129,17 +130,17 @@ function handleRestartQuiz(){
 function generateResultsFeedback(){
     if (STORE[1].correctCounter === STORE[0].length){
         return `
-            <h2>PERFECT SCORE</h2>
+            <h2>PERFECT SCORE!!!</h2>
             <p>You have a master's eye</p>
             `
     } else if (STORE[1].correctCounter > STORE[1].incorrectCounter){
         return `
-            <h2>GREAT JOB</h2>
+            <h2>GREAT JOB!!!</h2>
             <p>You know art!</p>
         `
     } else {
         return `
-            <h2>NICE TRY</h2>
+            <h2>NICE TRY!</h2>
             <p>There's lots of great art out there, keep learning!</p>
         `
     }
@@ -149,11 +150,16 @@ function handleGetResults(){
     $('.get-results').click(() => {
         console.log('get results clicked');
         $('.quiz-card').html(`
-            <h2>Your Results:</h2>
-            ${STORE[1].correctCounter} Correct
-            ${STORE[1].incorrectCounter} Incorrect
-            ${generateResultsFeedback()}
-            <button class="take-quiz-again">Take the Quiz Again!</button>
+            <div class="results-card">
+                <h2>Your Results:</h2>
+                <div class="results-card-score-counter">
+                    <div>${STORE[1].correctCounter} Correct</div>
+                    <div>${STORE[1].incorrectCounter} Incorrect</div>
+                </div>
+                <img class="results-img" src="https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/2015/08/3049767-poster-p-2-spy-the-unsung-psychedelic-pop-art-landscapes-of-roy-lichtenstein.jpg" alt="Roy Lichtenstein painting" />
+                ${generateResultsFeedback()}
+                <button class="take-quiz-again blue-btn">Take the Quiz Again!</button>
+            </div>
             `)   
             handleRestartQuiz();
     })
@@ -163,6 +169,7 @@ function generateNewQuestion(question){
     return `
         <img src=${question.url} alt="famous painting" height="100">
         <form id="question-form">
+            <h4><strong>Choose One:</strong></h4>
             <div class="input-container">
                 <div>
                     <input type="radio" name="quiz-answer" id="${question.answers[0]}">
@@ -186,8 +193,8 @@ function generateNewQuestion(question){
         <div class="feedback-div">
 
         </div>
-        <button class="next-question">Next Question</button>
-        <button class="get-results">Get Results</button>
+        <button class="next-question blue-btn">Next Question</button>
+        <button class="get-results blue-btn">Get Results</button>
     `
 }
 
@@ -212,7 +219,7 @@ function handleSubmitAnswer(answer){
         STORE[1].correctCounter++
         $('.feedback-div').html(
             `
-                <h2>Correct</h2>
+                <h2>Correct!</h2>
                 <p>${currentQuestion.feedbackStatement}</p>
             `
         )
@@ -221,7 +228,7 @@ function handleSubmitAnswer(answer){
         STORE[1].incorrectCounter++
         $('.feedback-div').html(
             `
-                <h2>Incorrect</h2>
+                <h2>Incorrect!</h2>
                 <p>${currentQuestion.feedbackStatement}</p>
             `
         )
